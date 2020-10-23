@@ -1,4 +1,4 @@
-g = open('list1.txt','w')
+g = open('list1.txt','a')
 ss = 0
 while ss != "конец":
     ss = input("действие ")
@@ -8,4 +8,10 @@ while ss != "конец":
         q = input("Оценка ")
         rr = f + " " + d  + " " + q
         print(rr)
-        rr.write('list1.txt')
+        g.write(rr + "\n")
+    if ss == "стереть":
+        g.close()
+        g = open('list1.txt','w')
+        g.close()
+        g = open('list1.txt','a')
+g.close()
