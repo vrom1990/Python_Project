@@ -44,6 +44,10 @@ while o != "exit":
 
     if o == "save":
         dataFile = open("list2.txt", "w")
-        dataFile.write(str(dataList))
+        #dataFile.write(str(dataList
+        elem = 0
+        mn = 0
+        for elem in dataList:
+            dataFile.write(str(elem) + "\n")
         dataFile.close()
     o = input("action ")
