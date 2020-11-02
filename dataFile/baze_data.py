@@ -42,6 +42,17 @@ while o != "exit":
     if o == "deleteAll":
         dataList.clear()
 
+    if o == "-+ plase":
+        mo = int(input("plase "))
+        mo = mo - 1
+        j = input("number ")
+        dataList[mo] = int(j)
+
+    if o == "- plase":
+        j = int(input("plase "))
+        j = j - 1
+        dataList.pop(j)
+        
     if o == "save":
         dataFile = open("list2.txt", "w")
         #dataFile.write(str(dataList
