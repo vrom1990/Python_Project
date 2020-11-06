@@ -16,6 +16,7 @@ while o != "exit":
                 print(elem)
         else:
             print("list is empty")
+        print("")
     
     if o == "+ up":
         j = input("number ")
@@ -52,6 +53,12 @@ while o != "exit":
         j = int(input("plase "))
         j = j - 1
         dataList.pop(j)
+
+    if o == "+ plase":
+        mo = int(input("plase "))
+        mo = mo - 1
+        j = int(input("number "))
+        dataList.insert(mo, j)
         
     if o == "save":
         dataFile = open("list2.txt", "w")
