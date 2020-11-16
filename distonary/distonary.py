@@ -10,6 +10,9 @@ while e != "exit":
         q = input("surname ")
         a = input("age ")
         d.append({"name" : w,"surname" : q, "age" : a})
+    if e == "showAll":
+        for dict in d:
+            print(dict["name"], dict["surname"], dict["age"])
     if e == "show":
         j = int(input("plase "))
         k = input("what ")
@@ -18,6 +21,8 @@ while e != "exit":
         lool.close()
         lool = open('dist.txt', 'w')
         for dict in d:
-            print(dict["age"])
+            #print(dict["name"], dict["surname"], dict["age"])
+            lool.write(dict["name"] + " " + dict["surname"]  + " " + dict["age"] + "\n")
+            
     e = input("action ")
 lool.close()
