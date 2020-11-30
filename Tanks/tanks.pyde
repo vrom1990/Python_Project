@@ -1,9 +1,9 @@
-x1 = 0
-y1 = 0
-ul = 180
-x2 = 0
-y2 = 0
-ul2 = 0
+x1 = 500
+y1 = 500 
+angleTank1 = 180
+x2 = 30
+y2 = 30
+angleTank2 = 0
 T1UP = False
 T1DOWN = False
 T1LEFT = False
@@ -16,57 +16,68 @@ T1SHOOT = False
 T2SHOOT = False
 boom = 0
 ldf = 0
+ldf2 = 0
 xBullet = 0
 yBullet = 0
-ule = 0
+ule = 0 
 ula = 0
+xBullet2 = 0
+yBullet2 = 0
 def setup():
     size(600,550)
     background(34, 139, 34)
 def draw():
-    global x1, y1, ul, ul2, x2, y2, tanka, tanke,T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,ldf,xBullet,yBullet,ule
+    global x1, y1, angleTank1, angleTank2, x2, y2, tanka, tanke,T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,ldf,xBullet,yBullet,ule
     background(34, 139, 34)
-    text(boom,100,100)
+    text(str(xBullet) + " " + str(yBullet),30,30)
+    tank(x1,y1)
+    bullet1()    
     push()
-    translate(x1,y1)
-    tank(500,500)
-    if ldf == 1:
-        bullet1()    
-    pop()
-    push()
-    translate(x2,y2)
-    tank2(60,60)
+    tank2()
+    bullet2() 
     pop()
     if T1UP:
-        x1 = x1 + cos(radians(ul))
-        y1 = y1 + sin(radians(ul))
+        x1 = x1 + cos(radians(angleTank1))
+        y1 = y1 + sin(radians(angleTank1))
     if T1DOWN:
-        x1 = x1 - cos(radians(ul))
-        y1 = y1 - sin(radians(ul))
+        x1 = x1 - cos(radians(angleTank1))
+        y1 = y1 - sin(radians(angleTank1))
     if T1RIGHT:
-        ul = ul + 0.8
+        angleTank1 = angleTank1 + 0.8
     if T1LEFT:
-        ul = ul - 0.8
+        angleTank1 = angleTank1 - 0.8
         
     if T2UP:
-        x2 = x2 + cos(radians(ul2))
-        y2 = y2 + sin(radians(ul2))
+        x2 = x2 + cos(radians(angleTank2))
+        y2 = y2 + sin(radians(angleTank2))
     if T2DOWN:
-        x2 = x2 - cos(radians(ul2))
-        y2 = y2 - sin(radians(ul2))
+        x2 = x2 - cos(radians(angleTank2))
+        y2 = y2 - sin(radians(angleTank2))
     if T2RIGHT:
-        ul2 = ul2 + 0.8
+        angleTank2 = angleTank2 + 0.8
     if T2LEFT:
-        ul2 = ul2 - 0.8
+        angleTank2 = angleTank2 - 0.8
     if T1SHOOT:
         ldf = 1
         boom = 1
+        xBullet = x1
+        yBullet = y1
+        ule = angleTank1
+        T1SHOOT = False
+    if T2SHOOT:
+        ldf = 1
+        xBullet2 = x2
+        yBullet2 = y2
+        ula = angleTank2
+        T2SHOOT = False
     if ldf == 1:
-        xBullet = xBullet - cos(radians(ule))
-        ybullet = yBullet - sin(radians(ule))
-        ule = ule - 500
+        xBullet = xBullet + cos(radians(ule)) * 33
+        yBullet = yBullet + sin(radians(ule)) * 33
+    if ldf2 == 1:
+        xBullet2 = xBullet2 + cos(radians(ula)) * 33
+        yBullet2 = yBullet2 + sin(radians(ula)) * 33
 def keyPressed():
-    global x1, y1, ul, ul2, x2, y2, tanka, tanke,T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,ldf
+    global x1, y1, angleTank1, angleTank1, x2, y2, tanka, tanke,T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,ldf,ldf2,xBullet2,yBullet2
     
     if keyCode == 38:
         T1UP = True
@@ -91,22 +102,24 @@ def keyPressed():
         T2SHOOT = True
 def tank(x, y):
     #ul = ul + 0.1
-    global tanka, ul
+    push()
+    global tanka,angleTank1 
     tanka = loadImage("1.png")
     translate(x, y)
-    rotate(radians(ul))
+    rotate(radians(angleTank1))
     imageMode(CENTER)
     image(tanka,0,0)
-
-def tank2(xr, yr):
+    pop() 
+def tank2():
     global tanke
     tanke = loadImage("2.png")
     imageMode(CENTER)
-    translate(xr, yr)
-    rotate(radians(ul2))
+    translate(x2, y2)
+    rotate(radians(angleTank2))
     image(tanke,0,0)
+    
 def keyReleased():
-    global T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,xBullet,yBulllet
+    global T1UP,T1DOWN,T1LEFT,T1RIGHT,T2UP,T2DOWN,T2LEFT,T2RIGHT,T1SHOOT,T2SHOOT,boom,xBullet,yBulllet,ldf2,xBullet2,yBullet2
     if keyCode == UP:
         T1UP = False
     if keyCode == DOWN:
@@ -129,8 +142,27 @@ def keyReleased():
         T1SHOOT = False
         boom = 0  
     if key == "e":
-        T2SHOOT = True
+        T2SHOOT = False
+        ldf2 = 0
 def bullet1():
-    fill(255,230,0)
-    noStroke()
-    rect(20+xBullet,yBullet,60,2)
+    if ldf == 1:
+        fill(255,230,0)
+        push()
+        translate(xBullet,yBullet)
+        rotate(radians(ule))
+        noStroke()
+        rectMode(CENTER)
+        #rect(0,0,60,2)
+        rect(60,1,65,2)
+        pop()
+def bullet2():
+    if ldf2 == 1:
+        fill(255,230,0)
+        push()
+        translate(xBullet2,yBullet2)
+        rotate(radians(ula))
+        noStroke()
+        rectMode(CENTER)
+        #rect(0,0,60,2)
+        rect(60,1,65,2)
+        pop()
