@@ -19,12 +19,12 @@ class Planet():
         ellipse(self.position,0,self.sizer,self.sizer)
         pop()
 merkuri = Planet("Merkuri",2,2,10,115,191,168,125)
-venera = Planet("Venera",4,3,18,127,191,140,44)
+venera = Planet("Venera",4,3,18,139,191,140,44)
 def setup():
     size(600,600)
 def draw():
     global merkuri
-    background(0,0,50)
+    background(20,0,40)
     push()
     fill(255,200,0)
     noStroke()
