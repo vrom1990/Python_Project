@@ -76,6 +76,17 @@ def bolit(event):
         #print(dict["name"], dict["surname"], dict["age"])
     lool.close()
     exit()
+def lukashenko(event):
+    global lool
+    text.place_forget()
+    text.place(x=105, y=151)
+    
+    textInput = ""
+    text.delete(1.0,"end")
+    for dict in d:
+        textInput = textInput + dict["name"] + " " + dict["surname"]  + " " + dict["age"] + "\n"
+
+    text.insert(1.0,textInput)
 root = Tk()
 root.title("Distonary on tkinder")
 root.geometry('330x330+200+100')
@@ -109,12 +120,15 @@ l4.config(bg='#708090', fg='#FFFFFF')
 l5 = Label(text="Name/Surname/Age",font="Verdana",pady = "1")
 l5.config(bg='#708090', fg='#FFFFFF')
 killer = Label(pady = "1", bg='black', fg='white',font="Verdana")
+text = Text(root,width=20, height=7)
+#text.configure(state='disabled')
 
 but.bind('<Button-1>', lolol)
 but4.bind('<Button-1>', bolit)
 bommb.bind('<Button-1>', biiolog)
 but3.bind('<Button-1>', eeee)
 tanki.bind('<Button-1>',nain)
+but2.bind('<Button-1>',lukashenko)
 '''
 e = input("action ")
 while e != "exit":
