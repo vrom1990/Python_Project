@@ -18,7 +18,10 @@ def lolol(event):
     l3.place(x=150, y=215)
     ag.place(x=105, y=239)
     bommb.place(x=142, y=275)
-
+    
+    be.place_forget()
+    was.place_forget()
+    been.place_forget()
     l4.place_forget()
     kek.place_forget()
     l5.place_forget()
@@ -39,6 +42,7 @@ def biiolog(event):
     a = ag.get()
     d.append({"name" : m,"surname" : q, "age" : a})
 def eeee(event):
+    var.set(0)
     killer.place_forget()
     tr = 2
     kek.delete(0,END)
@@ -46,8 +50,12 @@ def eeee(event):
     l4.place(x=141, y=127)
     kek.place(x=105, y=151)
     l5.place(x=80, y=170)
-    keka.place(x=105, y=195)
-    tanki.place(x=135, y=225)
+    #keka.place(x=105, y=195)
+    be.place(x=140, y=188)
+    was.place(x=140, y=207)
+    been.place(x=140, y=226)
+    tanki.place(x=135, y=252)
+    
 
     l1.place_forget()
     l2.place_forget()
@@ -62,9 +70,18 @@ def nain(event):
     l5.place_forget()
     keka.place_forget()
     tanki.place_forget()
+    be.place_forget()
+    was.place_forget()
+    been.place_forget()
+    if var.get() == 0:
+        k = "name"
+    elif var.get() == 1:
+        k = "surname"
+    elif var.get() == 2:
+        k = "age"
     j = int(kek.get())
     j = j - 1
-    k = keka.get()
+    #k = keka.get()
     killer["text"] = (d[j][k])
     killer.place(relx=0.5, y=142, anchor=CENTER)
 def bolit(event):
@@ -80,6 +97,7 @@ def lukashenko(event):
     aaa = Toplevel()
     aaa.geometry('330x330+400+300')
     aaa['bg'] = 'grey'
+    aaa.resizable(width=False, height=False)
     
     text = Text(aaa ,width=39, height=21)
     global lool
@@ -91,7 +109,11 @@ def lukashenko(event):
         textInput = textInput + dict["name"] + " " + dict["surname"]  + " " + dict["age"] + "\n"
     text.insert(1.0,textInput)
 global aaa
+#Button = батон(хлеб)
 root = Tk()
+root.resizable(width=False, height=False)
+var = IntVar()
+var.set(0)
 root.title("Distonary on tkinder")
 root.geometry('330x330+200+100')
 root["bg"] = "#708090"
@@ -124,6 +146,9 @@ l4.config(bg='#708090', fg='#FFFFFF')
 l5 = Label(text="name/surname/age",font="Verdana",pady = "1")
 l5.config(bg='#708090', fg='#FFFFFF')
 killer = Label(pady = "1", bg='black', fg='white',font="Verdana")
+be = Radiobutton(text="name", variable=var, value=0, bg = "#708090")
+was = Radiobutton(text="surname",variable=var, value=1, bg = "#708090")
+been = Radiobutton(text="age",variable=var, value=2, bg = "#708090")
 #text.configure(state='disabled')
 
 but.bind('<Button-1>', lolol)
@@ -132,32 +157,5 @@ bommb.bind('<Button-1>', biiolog)
 but3.bind('<Button-1>', eeee)
 tanki.bind('<Button-1>',nain)
 but2.bind('<Button-1>',lukashenko)
-'''
-e = input("action ")
-while e != "exit":
-    if e == "new":
-        w = input("name ")
-        q = input("surname ")
-        a = input("age ")
-        d.append({"name" : w,"surname" : q, "age" : a})
-    if e == "showAll":
-        for dict in d:
-            print(dict["name"], dict["surname"], dict["age"])
-    if e == "show":
-        j = int(input("plase "))
-        k = input("what ")
-        print(d[j][k])
-    if e == "save":
-        lool.close()
-        lool = open('dist.txt', 'w')
-        for dict in d:
-            #print(dict["name"], dict["surname"], dict["age"])
-            lool.write(dict["name"] + " " + dict["surname"]  + " " + dict["age"] + "\n")
-            
-    e = input("action ")
-'''
-#but.pack()
-#but2.pack()
-#but3.pack()
-#but4.pack()
+
 root.mainloop()
